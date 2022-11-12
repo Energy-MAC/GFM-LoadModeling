@@ -2,6 +2,9 @@
 ##### Generator Components ######
 #################################
 
+# Parameters are taken from Milano's book Power System Modelling and Scripting
+# Kundur's book and typical AVR and TG system data
+
 GENROU_ex() = RoundRotorQuadratic(
     R = 0.0,
     Td0_p = 8.0,
@@ -14,8 +17,24 @@ GENROU_ex() = RoundRotorQuadratic(
     Xq_p = 0.55,
     Xd_pp = 0.25,
     Xl = 0.2,
-    Se = (0.0, 1.0),
+    Se = (0.0, 0.0),
 )
+
+Marconato_ex() = MarconatoMachine(
+    0.0, # R
+    1.8, #Xd
+    1.7, #Xq
+    0.3, #Xd_p
+    0.55, #Xq_p
+    0.25, #Xd_pp
+    0.25, #Xq_pp
+    8.00, #Td0_p
+    0.4, #Tq0_p
+    0.03, #Td0_pp
+    0.05, #Tq0_pp
+    0.0, #T_AA
+) 
+
 shaft_ex() = SingleMass(
     H = 6.175,
     D = 0.05,
@@ -50,6 +69,18 @@ function dyn_genrou(gen)
         name = get_name(gen),
         ω_ref = 1.0,
         machine = GENROU_ex(), 
+        shaft = shaft_ex(), 
+        avr = avr_sexs(), 
+        prime_mover = tg_tgov1(), 
+        pss = pss_none(), 
+    )
+end
+
+function dyn_marconato(gen)
+    return PSY.DynamicGenerator(
+        name = get_name(gen),
+        ω_ref = 1.0,
+        machine = Marconato_ex(), 
         shaft = shaft_ex(), 
         avr = avr_sexs(), 
         prime_mover = tg_tgov1(), 

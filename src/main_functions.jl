@@ -17,8 +17,8 @@ With α = β = 2.0 we get Constant Impedance load
 """
 function change_load_coefficients!(sys::System, α::Float64, β::Float64)
     load = first(get_components(StaticLoad, sys))
-    set_active_power_coefficient(load, α)
-    set_reactive_power_coefficient(load, β)
+    set_active_power_coefficient!(load, α)
+    set_reactive_power_coefficient!(load, β)
 end
 
 function attach_3rd_induction_motor!(sys::System)
@@ -31,4 +31,10 @@ function attach_5th_induction_motor!(sys::System)
     load = first(get_components(StaticLoad, sys))
     ind_motor = Ind_Motor(load)
     add_component!(sys, ind_motor, load)
+end
+
+function attach_active_cpl!(sys::System)
+    load = first(get_components(StaticLoad, sys))
+    dyn_load = active_cpl(load)
+    add_component!(sys, dyn_load, load)
 end
