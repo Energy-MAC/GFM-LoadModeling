@@ -75,7 +75,7 @@ for p in P_range
         if (key == "Marconato") || (key == "VSM")
             sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), all_lines_dynamic = true)
         else
-            sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), all_lines_dynamic = true, frequency_reference = ConstantFrequency)
+            sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), all_lines_dynamic = true, frequency_reference = ConstantFrequency())
         end
         if sim.status == PSID.BUILT
             sm = small_signal_analysis(sim).stable
@@ -98,7 +98,7 @@ for k in keys(sys_dict)
     true_ixs = dict_true_ixs[k]
     plot(P_load, V_load, color = :blue, label = "PV Curve", xlabel = "Load Power [pu]", ylabel = "Load Bus Voltage [pu]")
     display(Plots.scatter!(P_load[true_ixs] , V_load[true_ixs], markerstrokewidth= 0, label = k, markersize = 3))
-    savefig("results/PV_Curves/EMT_ActiveLoad/$(k)_PV.png")
+    #savefig("results/PV_Curves/EMT_ActiveLoad/$(k)_PV.png")
 end
 
 # Paper Figure
@@ -108,4 +108,4 @@ droop_ixs = dict_true_ixs["Droop"]
 display(scatter!(P_load[genrou_ixs] , V_load[genrou_ixs], markerstrokewidth= 0, label = "Marconato", markersize = 4, color = :blue))
 display(scatter!(P_load[droop_ixs] , V_load[droop_ixs], markerstrokewidth= 0, label = "Droop/VSM", markersize = 2,
                 xticks = 0:0.5:5, markershape = :circle, color = :red, size = (600, 300)))
-savefig("results/PV_Curves/EMT_ActiveLoad/ActiveLoad_PaperFigure.png")
+#savefig("results/PV_Curves/EMT_ActiveLoad/ActiveLoad_PaperFigure.png")

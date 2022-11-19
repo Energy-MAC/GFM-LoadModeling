@@ -75,7 +75,7 @@ for p in P_range
         if (key == "Marconato") || (key == "VSM")
             sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), all_lines_dynamic = true)
         else
-            sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), all_lines_dynamic = true, frequency_reference = ConstantFrequency)
+            sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), all_lines_dynamic = true, frequency_reference = ConstantFrequency())
         end
         if sim.status == PSID.BUILT
             sm = small_signal_analysis(sim).stable
@@ -99,5 +99,5 @@ for k in keys(sys_dict)
     true_ixs = dict_true_ixs[k]
     plot(P_load, V_load, color = :blue, label = "PV Curve", xlabel = "Load Power [pu]", ylabel = "Load Bus Voltage [pu]")
     display(Plots.scatter!(P_load[true_ixs] , V_load[true_ixs], markerstrokewidth= 0, label = k))
-    savefig("results/PV_Curves/EMT_CIL/$(k)_PV")
+    #savefig("results/PV_Curves/EMT_CIL/$(k)_PV")
 end

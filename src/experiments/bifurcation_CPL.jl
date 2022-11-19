@@ -57,7 +57,7 @@ results = read_results(sim)
 t, eq_p3 = get_state_series(results, ("generator-101-1", :eq_p))
 t, Vf3 = get_state_series(results, ("generator-101-1", :Vf))
 plot!(eq_p3, Vf3, xlabel = "eq_p", ylabel = "E_fd", linewidth = 2, label = "Shift -0.005")
-savefig("results/Bifurcation/QSP_GENROU_LimitCycles.png")
+#savefig("results/Bifurcation/QSP_GENROU_LimitCycles.png")
 
 
 
