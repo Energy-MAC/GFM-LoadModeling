@@ -72,7 +72,7 @@ for p in P_range
         if (key == "Genrou") || (key == "VSM")
             sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0))
         else
-            sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), frequency_reference = ConstantFrequency)
+            sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.0), frequency_reference = PSID.ConstantFrequency())
         end
         if sim.status == PSID.BUILT
             sm = small_signal_analysis(sim).stable
@@ -98,7 +98,7 @@ for k in keys(sys_dict)
     true_ixs = dict_true_ixs_p[k]
     plot(P_load_p, V_load_p, color = :blue, label = "PV Curve", xlabel = "Load Power [pu]", ylabel = "Load Bus Voltage [pu]")
     display(Plots.scatter!(P_load_p[true_ixs] , V_load_p[true_ixs], markerstrokewidth= 0, label = k))
-    savefig("results/PV_Curves/QSP_CPL/$(k)_PV.png")
+    #savefig("results/PV_Curves/QSP_CPL/$(k)_PV.png")
 end
 
 # Paper Figure
@@ -108,5 +108,5 @@ droop_ixs = dict_true_ixs_p["Droop"]
 display(scatter!(P_load_p[genrou_ixs] , V_load_p[genrou_ixs], markerstrokewidth= 0, label = "GENROU", markersize = 4, color = :blue))
 display(scatter!(P_load_p[droop_ixs] , V_load_p[droop_ixs], markerstrokewidth= 0, label = "Droop/VSM", markersize = 2,
                 xticks = 0:0.5:5, markershape = :circle, color = :red, size = (600, 300)))
-savefig("results/PV_Curves/QSP_CPL/Paper_QSP_PV.png")
+#savefig("results/PV_Curves/QSP_CPL/Paper_QSP_PV.png")
     

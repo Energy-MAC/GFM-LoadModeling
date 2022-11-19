@@ -23,7 +23,7 @@ function outer_control_droop()
     function reactive_droop()
         return ReactivePowerDroop(kq = 0.05, ωf = 2 * pi * 20)
     end
-    return OuterControl(active_droop(), reactive_droop())
+    return OuterControl(active_droop(), reactive_droop(), Dict{String,Any}("is_not_reference" => 0.0))
 end
 
 # VSM
@@ -45,7 +45,7 @@ function outer_control_voc()
     function reactive_voc()
         return PSY.ReactiveVirtualOscillator(k2 = 0.4 * 1.0)
     end
-    return OuterControl(active_voc(), reactive_voc())
+    return OuterControl(active_voc(), reactive_voc(), Dict{String,Any}("is_not_reference" => 0.0))
 end
 
 ######## Inner Controls #########
@@ -67,7 +67,7 @@ no_pll() = PSY.FixedFrequency()
 
 ######## Filter Data ########
 filt() = LCLFilter(lf = 0.08, rf = 0.003, cf = 0.074, lg = 0.2, rg = 0.01)
-filt_no_dynamics() = LCLFilter(lf = 0.08, rf = 0.003, cf = 0.074, lg = 0.2, rg = 0.01, ext = Dict{String,Any}("bool_mm_value" => 0.0))
+filt_no_dynamics() = LCLFilter(lf = 0.08, rf = 0.003, cf = 0.074, lg = 0.2, rg = 0.01, ext = Dict{String,Any}("is_filter_differential" => 0.0))
 filt_voc() = LCLFilter(lf = 0.0196, rf = 0.0139, cf = 0.1086, lg = 0.0196, rg = 0.0139)
 
 ####### DC Source Data #########
