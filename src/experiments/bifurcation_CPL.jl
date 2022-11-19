@@ -14,7 +14,7 @@ status = run_powerflow!(sys)
 
 ## Unstable Cycle
 
-pert_state = PSID.ModifyState(1.0, 5, 0.05)
+pert_state = PSID.PerturbState(1.0, 5, 0.05)
 
 sim = Simulation(ResidualModel, sys, pwd(), (0.0, 7.0), pert_state)
 sm = small_signal_analysis(sim)   
@@ -29,7 +29,7 @@ t, Vf = get_state_series(results, ("generator-101-1", :Vf))
 plot(eq_p, Vf, xlabel = "eq_p", ylabel = "E_fd",linewidth = 2, label = "Shift 0.05")
 
 ## Limit Cycle
-pert_state = PSID.ModifyState(1.0, 5, -0.01)
+pert_state = PSID.PerturbState(1.0, 5, -0.01)
 
 sim = Simulation(ResidualModel, sys, pwd(), (0.0, 50.0), pert_state)
 sm = small_signal_analysis(sim)   
@@ -44,7 +44,7 @@ t, Vf2 = get_state_series(results, ("generator-101-1", :Vf))
 plot!(eq_p2, Vf2, xlabel = "eq_p", ylabel = "E_fd", linewidth = 2, label = "Shift -0.01")
 
 ## Limit Cycle2
-pert_state = PSID.ModifyState(1.0, 5, -0.005)
+pert_state = PSID.PerturbState(1.0, 5, -0.005)
 
 sim = Simulation(ResidualModel, sys, pwd(), (0.0, 100.0), pert_state)
 sm = small_signal_analysis(sim)   
@@ -73,7 +73,7 @@ set_active_power!(load, P_critical_voc)
 q = P_critical_voc * tan(acos(1.0))
 set_reactive_power!(load, q)
 status = run_powerflow!(sys)
-pert_state = PSID.ModifyState(1.0, 7, -0.1)
+pert_state = PSID.PerturbState(1.0, 7, -0.1)
 
 sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.55), pert_state, frequency_reference = ConstantFrequency)
 sm = small_signal_analysis(sim)   

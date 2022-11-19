@@ -15,7 +15,7 @@ status = run_powerflow!(sys)
 
 ## Unstable Cycle
 
-pert_state = PSID.ModifyState(1.0, 9, 0.05)
+pert_state = PSID.PerturbState(1.0, 9, 0.05)
 
 sim = Simulation(MassMatrixModel, sys, pwd(), (0.0, 30.0), pert_state, all_lines_dynamic = true)
 sm = small_signal_analysis(sim)   
@@ -42,7 +42,7 @@ set_active_power!(load, P_critical_voc)
 q = P_critical_voc * tan(acos(1.0))
 set_reactive_power!(load, q)
 status = run_powerflow!(sys)
-pert_state = PSID.ModifyState(1.0, 23, 0.2)
+pert_state = PSID.PerturbState(1.0, 23, 0.2)
 
 sim = Simulation(MassMatrixModel, sys, pwd(), (0.0, 10.35), pert_state, all_lines_dynamic = true, frequency_reference = ConstantFrequency)
 sm = small_signal_analysis(sim)   
