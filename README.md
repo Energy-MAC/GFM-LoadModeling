@@ -2,7 +2,7 @@
 
 This repository contains the Julia code used in the paper: R. Henriquez-Auba, J. D. Lara and D. S. Callaway, "Small-Signal Stability of Load and Network Dynamics on Grid-Forming Inverters", submitted to the IEEE Power and Energy General Meeting (IEEE PES-GM), 2023.
 
-The code is organized in different scripts that allow to replicate te results obtained in the paper. The results and figures are already available in the results folder, and the code replicates such figures.
+The code is organized in different scripts that allow to replicate the results obtained in the paper. The results and figures are already available in the results folder, and the code replicates such figures.
 
 The user must run Julia in this project environment to ensure correct versions of each package used. It is recommended to use Julia 1.8 or more.
 
