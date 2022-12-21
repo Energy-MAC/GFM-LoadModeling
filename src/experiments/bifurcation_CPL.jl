@@ -75,7 +75,7 @@ set_reactive_power!(load, q)
 status = run_powerflow!(sys)
 pert_state = PSID.PerturbState(1.0, 7, -0.1)
 
-sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.55), pert_state, frequency_reference = ConstantFrequency)
+sim = Simulation(ResidualModel, sys, pwd(), (0.0, 1.55), pert_state, frequency_reference = ConstantFrequency())
 sm = small_signal_analysis(sim)   
 println(sm.eigenvalues)
 dic = sm.participation_factors["generator-101-1"]
